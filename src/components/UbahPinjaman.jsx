@@ -7,7 +7,9 @@ function UbahPinjaman(props) {
         tgl_pinjam: '',
         tgl_kembali: '',
         buku_id: '',
-        anggota_id: ''
+        anggota_id: '',
+        buku: [],
+        anggota: []
     })
     const [bukus, setBukus] = useState([]);
     const [anggotas, setAnggotas] = useState([]);
@@ -16,6 +18,7 @@ function UbahPinjaman(props) {
     useEffect(() => {
         getBukus()
         getAnggotas()
+        getPinjam()
     }, [])
 
     const savePinjam = (e) => {
@@ -42,7 +45,11 @@ function UbahPinjaman(props) {
                 setData({
                     id: res.data.id,
                     tgl_pinjam: res.data.tgl_pinjam,
-                    tgl_kembali: res.data.tgl_kembali
+                    tgl_kembali: res.data.tgl_kembali,
+                    buku_id: res.data.buku_id,
+                    anggota_id: res.data.anggota_id,
+                    buku: res.data.buku,
+                    anggota: res.data.anggota,
                 })
                 setLoading(false)
             }).catch(err => {
@@ -89,7 +96,7 @@ function UbahPinjaman(props) {
 
             <form onSubmit={savePinjam}>
                 <div className="form-group">
-                    <label for="rilis">Tanggal Pinjam</label>
+                    <label htmlFor="rilis">Tanggal Pinjam</label>
                     <input type="date" className="form-control" value={data.tgl_pinjam} onChange={(e) => handleChange('tgl_pinjam', e.target.value)} />
                 </div>
                 <div className="form-group">
@@ -105,7 +112,7 @@ function UbahPinjaman(props) {
                                 bukus && bukus.map(buku => {
                                     return (
                                         <Fragment key={buku.id}>
-                                            <input className="form-check-input" type="radio" name="group1" value={buku.id} onChange={(e) => handleChange('buku_id', e.target.value)} />
+                                            <input className="form-check-input" type="radio" name="group1" value={buku.id} onChange={(e) => handleChange('buku_id', e.target.value)} checked={data.buku.id === buku.id} />
                                             <label className="form-check-label" >{buku.nama}</label> <br />
                                         </Fragment>
                                     )
@@ -133,7 +140,7 @@ function UbahPinjaman(props) {
                                     anggotas && anggotas.map(anggota => {
                                         return (
                                             <Fragment key={anggota.id}>
-                                                <input className="form-check-input" type="radio" name="group2" value={anggota.id} onChange={(e) => handleChange('anggota_id', e.target.value)} />
+                                                <input className="form-check-input" type="radio" name="group2" value={anggota.id} onChange={(e) => handleChange('anggota_id', e.target.value)} checked={data.anggota.id === anggota.id} />
                                                 <label className="form-check-label" >{anggota.nama}</label> <br />
                                             </Fragment>
                                         )

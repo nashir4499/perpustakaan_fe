@@ -69,9 +69,9 @@ function UbahAnggota(props) {
                     <label>Jenis Kelamin</label>
                     <div className="form-check">
                         {/* {data.nama === 'Laki-Laki' ? (true) : (false)} */}
-                        <input className="form-check-input" type="radio" name="gender" value="Laki-Laki" onChange={(e) => handleChange('jk', e.target.value)} />
+                        <input className="form-check-input" type="radio" name="gender" id="lk" value="Laki-Laki" onChange={(e) => handleChange('jk', e.target.value)} checked={data.jk === "Laki-Laki"} />
                         <label className="form-check-label" >Laki-Laki</label> <br />
-                        <input className="form-check-input" type="radio" name="gender" value="Perempuan" onChange={(e) => handleChange('jk', e.target.value)} />
+                        <input className="form-check-input" type="radio" name="gender" id="pr" value="Perempuan" onChange={(e) => handleChange('jk', e.target.value)} checked={data.jk === "Perempuan"} />
                         <label className="form-check-label" >Perempuan</label>
                     </div>
                 </div>
